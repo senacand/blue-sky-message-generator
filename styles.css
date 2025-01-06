@@ -17,6 +17,22 @@ h1 {
     margin-bottom: 8px;
 }
 
+.github-link {
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    font-size: 14px;
+    transition: opacity 0.2s;
+}
+
+.github-link:hover {
+    opacity: 1;
+}
+
 .container {
     max-width: 500px;
     width: 100%;
