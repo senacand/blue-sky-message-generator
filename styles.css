@@ -57,6 +57,7 @@ textarea {
     backdrop-filter: blur(10px);
     color: #ffffff;
     font-family: 'Roboto', sans-serif;
+    font-size: 16px;
     resize: none;
     min-height: 100px;
     outline: none;
@@ -77,4 +78,26 @@ button {
 
 button:hover {
     background: rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 16px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+
+    textarea {
+        min-height: 80px;
+    }
+
+    button {
+        padding: 10px 20px;
+    }
 } 
