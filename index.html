@@ -33,30 +33,32 @@
         <div class="preview-container">
             <canvas id="imageCanvas"></canvas>
         </div>
-        <div class="controls">
-            <div class="text-controls">
-                <div class="control-group">
-                    <button class="icon-btn" id="decreaseFontSize"><i class="fas fa-minus"></i></button>
-                    <span id="fontSize">16</span>
-                    <button class="icon-btn" id="increaseFontSize"><i class="fas fa-plus"></i></button>
+        <div class="editor-section">
+            <div class="controls">
+                <div class="text-controls">
+                    <div class="control-group">
+                        <button class="icon-btn" id="decreaseFontSize"><i class="fas fa-minus"></i></button>
+                        <span id="fontSize">16</span>
+                        <button class="icon-btn" id="increaseFontSize"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <div class="control-group">
+                        <button class="icon-btn" data-align="left"><i class="fas fa-align-left"></i></button>
+                        <button class="icon-btn" data-align="center"><i class="fas fa-align-center"></i></button>
+                        <button class="icon-btn" data-align="right"><i class="fas fa-align-right"></i></button>
+                    </div>
+                    <div class="control-group">
+                        <button class="icon-btn" data-valign="top"><i class="fas fa-arrow-up"></i></button>
+                        <button class="icon-btn" data-valign="middle"><i class="fas fa-grip-lines"></i></button>
+                        <button class="icon-btn" data-valign="bottom"><i class="fas fa-arrow-down"></i></button>
+                    </div>
                 </div>
-                <div class="control-group">
-                    <button class="icon-btn" data-align="left"><i class="fas fa-align-left"></i></button>
-                    <button class="icon-btn" data-align="center"><i class="fas fa-align-center"></i></button>
-                    <button class="icon-btn" data-align="right"><i class="fas fa-align-right"></i></button>
-                </div>
-                <div class="control-group">
-                    <button class="icon-btn" data-valign="top"><i class="fas fa-arrow-up"></i></button>
-                    <button class="icon-btn" data-valign="middle"><i class="fas fa-grip-lines"></i></button>
-                    <button class="icon-btn" data-valign="bottom"><i class="fas fa-arrow-down"></i></button>
-                </div>
+                <textarea id="textInput" placeholder="Enter your text here..."></textarea>
+                <button onclick="generateImage()"><i class="fas fa-save"></i> Save Image</button>
             </div>
-            <textarea id="textInput" placeholder="Enter your text here..."></textarea>
-            <button onclick="generateImage()"><i class="fas fa-save"></i> Save Image</button>
+            <a href="https://github.com/senacand/blue-sky-message-generator" class="github-link" target="_blank">
+                <i class="fab fa-github"></i> Source Code
+            </a>
         </div>
-        <a href="https://github.com/senacand/blue-sky-message-generator" class="github-link" target="_blank">
-            <i class="fab fa-github"></i> Source Code
-        </a>
     </div>
     <script src="script.js"></script>
 </body>

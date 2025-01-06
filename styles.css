@@ -23,10 +23,12 @@ h1 {
     opacity: 0.7;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     margin-top: 20px;
     font-size: 14px;
     transition: opacity 0.2s;
+    width: 100%;
 }
 
 .github-link:hover {
@@ -34,8 +36,9 @@ h1 {
 }
 
 .container {
-    max-width: 500px;
+    max-width: 100%;
     width: 100%;
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -140,17 +143,54 @@ button:hover {
     background: rgba(255, 255, 255, 0.1);
 }
 
-@media (max-width: 768px) {
+@media (min-width: 1024px) {
+    .container {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 40px;
+        max-width: 1200px;
+        padding: 0 40px;
+    }
+
+    .preview-container {
+        flex: 1;
+        margin: 0;
+    }
+
+    .editor-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    h1 {
+        width: 100%;
+        position: absolute;
+        top: 20px;
+        left: 0;
+        margin: 0;
+    }
+
+    .container {
+        margin-top: 80px;
+    }
+}
+
+@media (max-width: 1023px) {
     body {
         padding: 16px;
     }
 
     h1 {
         font-size: 24px;
+        margin-bottom: 16px;
     }
 
-    .container {
-        max-width: 100%;
+    .preview-container {
+        margin: 0 0 20px 0;
+        width: 100%;
     }
 
     textarea {
@@ -173,5 +213,18 @@ button:hover {
         padding: 6px;
         min-width: 32px;
         height: 32px;
+    }
+
+    .github-link {
+        margin-top: 16px;
+    }
+
+    .editor-section {
+        width: 100%;
+    }
+
+    .container {
+        max-width: 428px;
+        padding: 0;
     }
 } 
