@@ -4,35 +4,41 @@ const img = new Image();
 const textInput = document.getElementById('textInput');
 img.src = 'assets/text-background.jpg';
 
-// Restore text from localStorage if exists
+// Default text settings
+let textSettings = {
+    fontSize: 32,
+    horizontalAlign: 'left',
+    verticalAlign: 'middle'
+};
+
+// Restore text and settings from localStorage if exists
 const savedText = localStorage.getItem('bluesky-text') || '';
+const savedSettings = JSON.parse(localStorage.getItem('bluesky-text-settings') || JSON.stringify(textSettings));
+textSettings = savedSettings;
 textInput.value = savedText;
 
+// Update font size display
+document.getElementById('fontSize').textContent = textSettings.fontSize;
+
 img.onload = function() {
-    // Set canvas size to match image dimensions
     canvas.width = img.width;
     canvas.height = img.height;
     drawImage(savedText);
 };
 
 function drawImage(text = '') {
-    // Draw background image
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     
     if (text) {
-        // Configure text style
         ctx.fillStyle = '#FFFFFF';
-        ctx.font = '700 32px "Roboto"';
-        ctx.textAlign = 'left';
+        ctx.font = `700 ${textSettings.fontSize}px "Roboto"`;
+        ctx.textAlign = textSettings.horizontalAlign;
         ctx.textBaseline = 'top';
 
-        // Split text into paragraphs first (handle Enter key line breaks)
         const paragraphs = text.split('\n');
         const lines = [];
-
-        // Calculate line breaks for each paragraph
         const padding = 48;
-        const maxWidth = canvas.width - (padding * 2);
+        let maxWidth = canvas.width - (padding * 2);
 
         paragraphs.forEach(paragraph => {
             if (paragraph === '') {
@@ -56,21 +62,83 @@ function drawImage(text = '') {
             lines.push(currentLine);
         });
 
-        // Draw text
-        const lineHeight = 42;
+        const lineHeight = textSettings.fontSize * 1.3;
         const totalHeight = lines.length * lineHeight;
-        const startY = (canvas.height - totalHeight) / 2;
+        
+        // Calculate vertical position based on alignment
+        let startY;
+        switch(textSettings.verticalAlign) {
+            case 'top':
+                startY = padding;
+                break;
+            case 'bottom':
+                startY = canvas.height - totalHeight - padding;
+                break;
+            default: // middle
+                startY = (canvas.height - totalHeight) / 2;
+        }
+
+        // Calculate horizontal position based on alignment
+        let startX;
+        switch(textSettings.horizontalAlign) {
+            case 'left':
+                startX = padding;
+                break;
+            case 'right':
+                startX = canvas.width - padding;
+                break;
+            default: // center
+                startX = canvas.width / 2;
+        }
+
         lines.forEach((line, index) => {
-            ctx.fillText(line, padding, startY + (index * lineHeight));
+            ctx.fillText(line, startX, startY + (index * lineHeight));
         });
     }
+}
+
+// Font size controls
+document.getElementById('increaseFontSize').addEventListener('click', () => {
+    textSettings.fontSize = Math.min(72, textSettings.fontSize + 2);
+    document.getElementById('fontSize').textContent = textSettings.fontSize;
+    saveSettingsAndRedraw();
+});
+
+document.getElementById('decreaseFontSize').addEventListener('click', () => {
+    textSettings.fontSize = Math.max(12, textSettings.fontSize - 2);
+    document.getElementById('fontSize').textContent = textSettings.fontSize;
+    saveSettingsAndRedraw();
+});
+
+// Horizontal alignment controls
+document.querySelectorAll('[data-align]').forEach(button => {
+    button.addEventListener('click', (e) => {
+        document.querySelectorAll('[data-align]').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        textSettings.horizontalAlign = button.dataset.align;
+        saveSettingsAndRedraw();
+    });
+});
+
+// Vertical alignment controls
+document.querySelectorAll('[data-valign]').forEach(button => {
+    button.addEventListener('click', (e) => {
+        document.querySelectorAll('[data-valign]').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        textSettings.verticalAlign = button.dataset.valign;
+        saveSettingsAndRedraw();
+    });
+});
+
+function saveSettingsAndRedraw() {
+    localStorage.setItem('bluesky-text-settings', JSON.stringify(textSettings));
+    drawImage(textInput.value);
 }
 
 function generateImage() {
     const text = document.getElementById('textInput').value;
     drawImage(text);
     
-    // Convert canvas to PNG and trigger download
     const link = document.createElement('a');
     link.download = 'blue-sky-message.png';
     link.href = canvas.toDataURL('image/png');
@@ -82,4 +150,8 @@ document.getElementById('textInput').addEventListener('input', function(e) {
     const text = e.target.value;
     localStorage.setItem('bluesky-text', text);
     drawImage(text);
-}); 
+});
+
+// Set initial active states for alignment buttons
+document.querySelector(`[data-align="${textSettings.horizontalAlign}"]`)?.classList.add('active');
+document.querySelector(`[data-valign="${textSettings.verticalAlign}"]`)?.classList.add('active'); 

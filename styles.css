@@ -48,6 +48,44 @@ h1 {
     gap: 15px;
 }
 
+.text-controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.control-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: rgba(42, 42, 42, 0.5);
+    padding: 6px;
+    border-radius: 8px;
+}
+
+.icon-btn {
+    padding: 8px;
+    min-width: 36px;
+    height: 36px;
+    width: auto;
+    background: transparent;
+}
+
+.icon-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.icon-btn.active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#fontSize {
+    min-width: 24px;
+    text-align: center;
+    font-size: 14px;
+}
+
 textarea {
     width: calc(100% - 24px);
     padding: 12px;
@@ -65,19 +103,24 @@ textarea {
 
 button {
     padding: 12px 24px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(42, 42, 42, 0.5);
     border: none;
     border-radius: 12px;
     color: #ffffff;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
     backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
 }
 
 button:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 768px) {
@@ -99,5 +142,19 @@ button:hover {
 
     button {
         padding: 10px 20px;
+    }
+
+    .text-controls {
+        gap: 10px;
+    }
+
+    .control-group {
+        padding: 4px;
+    }
+
+    .icon-btn {
+        padding: 6px;
+        min-width: 32px;
+        height: 32px;
     }
 } 

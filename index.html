@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Blue Sky Message Generator</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,8 +15,25 @@
             <canvas id="imageCanvas"></canvas>
         </div>
         <div class="controls">
+            <div class="text-controls">
+                <div class="control-group">
+                    <button class="icon-btn" id="decreaseFontSize"><i class="fas fa-minus"></i></button>
+                    <span id="fontSize">16</span>
+                    <button class="icon-btn" id="increaseFontSize"><i class="fas fa-plus"></i></button>
+                </div>
+                <div class="control-group">
+                    <button class="icon-btn" data-align="left"><i class="fas fa-align-left"></i></button>
+                    <button class="icon-btn" data-align="center"><i class="fas fa-align-center"></i></button>
+                    <button class="icon-btn" data-align="right"><i class="fas fa-align-right"></i></button>
+                </div>
+                <div class="control-group">
+                    <button class="icon-btn" data-valign="top"><i class="fas fa-arrow-up"></i></button>
+                    <button class="icon-btn" data-valign="middle"><i class="fas fa-grip-lines"></i></button>
+                    <button class="icon-btn" data-valign="bottom"><i class="fas fa-arrow-down"></i></button>
+                </div>
+            </div>
             <textarea id="textInput" placeholder="Enter your text here..."></textarea>
-            <button onclick="generateImage()">Save Image</button>
+            <button onclick="generateImage()"><i class="fas fa-save"></i> Save Image</button>
         </div>
     </div>
     <script src="script.js"></script>
