@@ -62,6 +62,7 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    touch-action: manipulation;
 }
 
 .text-controls {
